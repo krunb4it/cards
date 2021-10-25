@@ -15,7 +15,7 @@ class Api_config extends REST_Controller {
     }
        
 	public function get_slider($slider_id = 0) {
-        if(!empty($id)){
+        if(!empty($slider_id)){
             $data = $this->db->order_by("slider_order","asc")->get_where("slider", ['slider_id' => $slider_id])->row();
         }else{
             $data = $this->db->order_by("slider_order","asc")->get("slider")->result();
