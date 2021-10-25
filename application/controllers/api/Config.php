@@ -14,17 +14,17 @@ class Config extends RestController{
     }
 	
 	// get info
-	public function index(){
-		$res = $this->db->get_where("slider",["slider_id" => 1])->row();
+	public function index_get(){
+		$res = $this->config_model->get_setting(); 
 		$this->response($res, 200);
-	} 
+	}	
 	
 	// get Slider
 	public function slider_get($slider_id = 0){
 		if($slider_id == 0){
-			$res = $this->db->order_by("slider_order","acs")->get("slider")->result();
-		} else { 
-			$res = $this->db->get_where("slider",["slider_id" => $slider_id])->row();
+			$res = $this->config_model->get_slider();
+		} else {
+			$res = $this->config_model->get_slider_id($slider_id);
 		} 
 		if(!empty($res)){
 			$this->response($res, 200);
@@ -35,11 +35,12 @@ class Config extends RestController{
 	
 	// get page
 	public function page_get($page_id = 0){
-		if($page_id == 0){
-			$res = $this->db->get("page")->result();
-		} else { 
-			$res = $this->db->get_where("page",["page_id" => $page_id])->row();
+		if($page_id == 0){ 
+			$res = $this->config_model->get_paeg();
+		} else {
+			$res = $this->config_model->get_paeg($page_id);
 		}
 		$this->response($res, 200);
 	}
+	
 }
