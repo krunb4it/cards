@@ -15,7 +15,7 @@ class Config extends RestController{
 	
 	// get info
 	public function index_get(){
-		$res = $this->config_model->get_setting(); 
+		$res = $this->api_config_model->get_setting(); 
 		$this->response($res, 200);
 	}	
 	
