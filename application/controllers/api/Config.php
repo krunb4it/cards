@@ -36,9 +36,9 @@ class Config extends RestController{
 	// get page
 	public function page_get($page_id = 0){
 		if($page_id == 0){ 
-			$res = $this->api_config_model->get_paeg();
+			$res = $this->api_config_model->get_page();
 		} else {
-			$res = $this->api_config_model->get_paeg($page_id);
+			$res = $this->api_config_model->get_page($page_id);
 		}
 		$this->response($res, 200);
 	}
