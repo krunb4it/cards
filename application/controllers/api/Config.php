@@ -10,7 +10,7 @@ class Config extends RestController{
 	
     public function __construct(){
         parent::__construct();
-        $this->load->model('config_model');
+        $this->load->model('api_config_model');
     }
 	
 	// get info
@@ -22,9 +22,9 @@ class Config extends RestController{
 	// get Slider
 	public function slider_get($slider_id = 0){
 		if($slider_id == 0){
-			$res = $this->config_model->get_slider();
+			$res = $this->api_config_model->get_slider();
 		} else {
-			$res = $this->config_model->get_slider_id($slider_id);
+			$res = $this->api_config_model->get_slider_id($slider_id);
 		} 
 		if(!empty($res)){
 			$this->response($res, 200);
@@ -32,13 +32,13 @@ class Config extends RestController{
 			$this->response($res, 404);
 		}
 	}
-	
+
 	// get page
 	public function page_get($page_id = 0){
 		if($page_id == 0){ 
-			$res = $this->config_model->get_paeg();
+			$res = $this->api_config_model->get_paeg();
 		} else {
-			$res = $this->config_model->get_paeg($page_id);
+			$res = $this->api_config_model->get_paeg($page_id);
 		}
 		$this->response($res, 200);
 	}
