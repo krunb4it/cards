@@ -3,8 +3,8 @@
 require APPPATH . 'libraries/REST_Controller.php';
      
 class Api_config extends REST_Controller {
-    
-	  /**
+     
+	/**
      * Get All Data from this method.
      *
      * @return Response
