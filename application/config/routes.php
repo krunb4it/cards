@@ -61,5 +61,5 @@ $route['translate_uri_dashes'] = FALSE;
 */
 
 
-$route['api'] = 'api/config/index';
-$route['api/get_slider/(:any)'] = 'api/config/get_slider/$1';
+$route['api/config'] = 'api/config/index';
+$route['api/slider/(:any)'] = 'api/config/slider/$1';

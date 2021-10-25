@@ -20,11 +20,12 @@ class Config extends RestController{
 	}
 	
 	
-	public function get_slider($slider_id = 0){
+	public function slider_get($slider_id = 0){
 		if($slider_id == 0){
-			$this->db->get("slider")->result();
+			$res = $this->db->get("slider")->result();
 		} else { 
-			$this->db->get_where("slider",["slider_id" => $slider_id])->row();
+			$res = $this->db->get_where("slider",["slider_id" => $slider_id])->row();
 		} 
+		$this->response($res, 200);
 	}
 }
