@@ -2,7 +2,7 @@
    
 require APPPATH . 'libraries/REST_Controller.php';
      
-class APi_config extends REST_Controller {
+class Api_config extends REST_Controller {
     
 	  /**
      * Get All Data from this method.
