@@ -54,3 +54,12 @@ $route['profile'] = 'config/profile';
 $route['profile_validate/(:any)/(:any)'] = 'config/profile_validate/$1/$2';
 $route['404_override'] = 'welcome/error404'; 
 $route['translate_uri_dashes'] = FALSE;
+
+
+/*
+	API Rroute
+*/
+
+
+$route['api'] = 'api/config/index';
+$route['api/get_slider/(:any)'] = 'api/config/get_slider/$1';
