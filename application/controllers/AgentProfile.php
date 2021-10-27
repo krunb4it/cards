@@ -6,15 +6,15 @@ class AgentProfile extends CI_Controller {
     public function __construct() {
 		parent::__construct();
 		$this->load->library('form_validation');
+		
+		if($this->session->userdata("agent_token") != $this->security->get_csrf_hash()){
+			redirect("agentProfile/login");
+		}
 	}
 	
 	public function index(){
-		if($this->session->userdata("is_logging") == false){
-			redirect("agentProfile/login");
-		} else {
-    		$data["page"] = "agentProfile/index";
-    		$this->load->view('include/temp',$data);  
-    	}
+		$data["page"] = "agentProfile/index";
+		$this->load->view('include/temp',$data);   
 	}
 	
 	public function login(){ 

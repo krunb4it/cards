@@ -24,7 +24,6 @@ class Validiations extends CI_Controller {
 		if($agent_id != null and $agent_token != null){
 			$res = $this->agent_model->agentValidateAccount($agent_id, $agent_token);
 			if($res != false){
-
 				$data = [
 					"agent_name"		=> $res->agent_name, 
 					"agent_email" 		=> $res->agent_email
@@ -59,7 +58,7 @@ class Validiations extends CI_Controller {
 				} 
 				
 				$this->session->set_flashdata("success", "تم تفعيل حسابكم بنجاح");
-				redirect("welcome/agent_login");
+				redirect("agentProfile");
 			} else {
 				$this->session->set_flashdata("error", "خطا في الرابط");
 				redirect("welcome/error404");
