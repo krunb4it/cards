@@ -21,6 +21,7 @@ class Validiations extends CI_Controller {
 	} 
 	
 	public function agentValidateAccount($agent_id = null, $agent_token = null){
+		
 		if($agent_id != null and $agent_token != null){
 			$res = $this->agent_model->agentValidateAccount($agent_id, $agent_token);
 			if($res != false){
