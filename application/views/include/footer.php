@@ -47,9 +47,19 @@
         <script src="<?=site_url()?>assets/vendors/choices.js/choices.min.js"></script>
         <script src="<?=site_url()?>assets/vendors/ckeditor/ckeditor.js"></script>
         <script src="<?=site_url()?>assets/vendors/taginput/tagsinput.js"></script> 
+		<script src="<?=site_url()?>assets/vendors/simple-datatables/simple-datatables.js"></script>
+    
 		<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
         
         <script src="<?=site_url()?>assets/js/main.js"></script> 
+		
+		<script>
+ /*
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+		
+		*/
+    </script>
     </body>
 </html>
 

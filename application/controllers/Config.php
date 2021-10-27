@@ -7,10 +7,15 @@ class Config extends CI_Controller {
 		parent::__construct();
 		$this->load->library('form_validation');  
 		$this->load->model('config_model');
+		$this->load->model('welcome_model');
  
 		if($this->session->userdata("my_token") != $this->security->get_csrf_hash()){
 			redirect("welcome/login");
 		}
+		/*
+		$permission = $this->welcome_model->have_permission();
+		( $permission == 0) ? redirect("welcome/no_auth") : "";
+		*/
 	}
 	
 	public function index(){

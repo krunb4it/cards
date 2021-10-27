@@ -22,6 +22,9 @@ class Welcome extends CI_Controller {
 	public function login(){ 
 		$this->load->view('login');
 	}
+	public function no_auth(){ 
+		$this->load->view('no_auth');
+	}
 	public function error404(){ 
 		$this->load->view('error404');
 	}
@@ -34,8 +37,8 @@ class Welcome extends CI_Controller {
 		);
 		$row = $this->db->get_where("users",$arr)->row();
 		if(!empty($row)){
-		    if($row->user_status == 1){
-				
+		    if($row->user_status == 1){ 
+
 				$this->config_model->update_token($row->user_id, $this->security->get_csrf_hash());
     	        $data = array(
     	                "user_id" 		=> $row->user_id

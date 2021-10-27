@@ -40,8 +40,8 @@
 								</div>
 							</div>
 							<button class="btn btn-primary btn-block btn-lg shadow-lg mt-5 btn-submit" type="submit">
-								<span class="spinner-border spinner-sm d-none mt-2" role="status" aria-hidden="true"></span>
-								<span> دخول </span>
+								<span class="spinner-border spinner-border-sm d-none mt-2" role="status" aria-hidden="true"></span>
+								<span> تسجيل دخول </span>
 							</button>
 						</form>
 						<div class="text-center mt-5 text-lg fs-4">
@@ -111,7 +111,7 @@
 					}, 3000);
 				}
 			});
-	</script> 
+		</script> 
 	</body> 
 </html>
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?= site_url()?>assets/vendors/choices.js/choices.min.css" /> 
     <link rel="stylesheet" href="<?= site_url()?>assets/vendors/taginput/tagsinput.css" />  
     <link rel="stylesheet" href="<?= site_url()?>assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="<?= site_url()?>assets/vendors/simple-datatables/style.css">
 	
 	
 	<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">

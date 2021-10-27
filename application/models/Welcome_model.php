@@ -7,6 +7,25 @@ class Welcome_model extends CI_Model {
         parent::__construct();
     }
     
+    // is_permission
+
+    function have_permission(){ 
+        (!empty($this->uri->segment(2))) ? $method = $this->uri->segment(2) : $method = "index"; 
+        $methodID = $this->db
+                        ->where("controller", $this->uri->segment(1))
+                        ->where("method", $method)
+                        ->get("permission_method")->row();
+
+        if(!empty($methodID)){
+            return $this->db
+                        ->where("user_id", $this->session->userdata("user_id"))
+                        ->where("method_id", $methodID->method_id)
+                        ->get("permission_user")->row()->permission_active; 
+        } else {
+            return FALSE;
+        }
+    }
+
     //get message history
     function msg_history($post){
         $arr = array( 
