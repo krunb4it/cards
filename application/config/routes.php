@@ -69,3 +69,4 @@ $route['api/page/(:any)'] 		= 'api/config/page/$1';
 */
 $route['adminValidateAccount/(:any)/(:any)']	= 'validiations/adminValidateAccount/$1/$2';
 $route['agentValidateAccount/(:any)/(:any)']	= 'validiations/agentValidateAccount/$1/$2';
+

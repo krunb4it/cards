@@ -65,11 +65,17 @@ class Agent_model extends CI_Model {
 				->where("agent_token", $agent_token)
 				->get("agent")->row();
 		if($is_validation == true){
-			return $this->db
-						->set("agent_active", 1)
-						->set("agent_token", md5(time()))
-						->where("agent_id", $agent_id)
-						->update("agent");
+			$row = $this->db
+					->set("agent_active", 1)
+					->set("agent_token", md5(time()))
+					->where("agent_id", $agent_id)
+					->update("agent"); 
+
+			if($row != false){
+				return $this->db->where("agent_id", $agent_id)->get("agent")->row;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
