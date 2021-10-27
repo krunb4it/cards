@@ -37,45 +37,7 @@ class Agent extends CI_Controller {
 	public function add_agent(){ 
 		$post = $this->input->post(null, true);
 		$token = bin2hex(openssl_random_pseudo_bytes(16));
- 
-		$data = [
-			"agent_id"			=> 1,
-			"agent_name" 		=> $post["agent_name"],
-			"agent_email" 		=> $post["agent_email"],
-			"agent_password"	=> $post["agent_password"],
-			"agent_token" 		=> $token,
-		];
-
-		$config = Array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			//'smtp_port' => 587,
-			'smtp_port' => 465,
-			'smtp_agent' => 'alaa.krunb@gmail.com', // change it to yours
-			'smtp_pass' => '411918139', // change it to yours
-			'mailtype' => 'html',
-			'charset' => 'utf-8',
-			'wordwrap' => TRUE
-		);
-		$this->load->library("email", $config);
 		
-		$message =  $this->load->view("email_send/agent/new_agent", $data ,true);
-
-		$this->email->set_header('Content-Type', 'text/html');
-		$this->email->set_newline("\r\n");
-		$this->email->from('alaa.krunb@gmail.com',"krunb4it");
-		$this->email->to("a.krunb@hotmail.com");
-		$this->email->subject('حساب وكيل جديد');
-		$this->email->message($message);
-		$this->email->set_mailtype("html");
-
-		if(!$this->email->send()) {
-			$res = show_error($this->email->print_debugger());
-			// echo  $this->email->print_debugger() ;
-		} 
-		die;
-
-
 		$this->form_validation->set_rules('agent_name', 'اسم المستخدم', 'trim|required|is_unique[agent.agent_name]');
 		$this->form_validation->set_rules('agent_jawwal', 'رقم الجوال', 'trim|is_unique[agent.agent_jawwal]');
 		$this->form_validation->set_rules('agent_email', 'البريد الالكتروني', 'trim|required|valid_email|is_unique[agent.agent_email]');
@@ -105,6 +67,43 @@ class Agent extends CI_Controller {
 				$res = "تم انشاء حساب وكيل جديد بنجاح";
 				$status = "success";
 				$link = "";
+
+				
+				$data = [
+					"agent_id"			=> $agent_id,
+					"agent_name" 		=> $post["agent_name"],
+					"agent_email" 		=> $post["agent_email"],
+					"agent_password"	=> $post["agent_password"],
+					"agent_token" 		=> $token,
+				];
+
+				$config = Array(
+					'protocol' => 'smtp',
+					'smtp_host' => 'ssl://smtp.googlemail.com',
+					//'smtp_port' => 587,
+					'smtp_port' => 465,
+					'smtp_agent' => 'alaa.krunb@gmail.com', // change it to yours
+					'smtp_pass' => '411918139', // change it to yours
+					'mailtype' => 'html',
+					'charset' => 'utf-8',
+					'wordwrap' => TRUE
+				);
+				$this->load->library("email", $config);
+				
+				$message =  $this->load->view("email_send/agent/new_agent", $data ,true);
+
+				$this->email->set_header('Content-Type', 'text/html');
+				$this->email->set_newline("\r\n");
+				$this->email->from('alaa.krunb@gmail.com',"krunb4it");
+				$this->email->to("a.krunb@hotmail.com");
+				$this->email->subject('حساب وكيل جديد');
+				$this->email->message($message);
+				$this->email->set_mailtype("html");
+
+				if(!$this->email->send()) {
+					$res = show_error($this->email->print_debugger());
+					// echo  $this->email->print_debugger() ;
+				} 
 			} else {
 				$res = "حدث خطأ اثناء حفظ التغيرات ، يرجى المحاولة مرة اخرى";
 				$status = "error";
