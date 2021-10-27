@@ -58,5 +58,21 @@ class Agent_model extends CI_Model {
 	function remove_agent_id($agent_id){
 		return $this->db->where("agent_id", $agent_id)->delete("agent");
 	}
+
+	function agentValidateAccount($agent_id, $agent_token){
+		$is_validation = $this->db
+				->where("agent_id", $agent_id)
+				->where("agent_token", $agent_token)
+				->get("agent")->row();
+		if($is_validation == true){
+			return $this->db
+						->set("agent_active", 1)
+						->set("agent_token", md5(time()))
+						->where("agent_id", $agent_id)
+						->update("agent");
+		} else {
+			return false;
+		}
+	}
 	
 }

@@ -60,7 +60,12 @@ $route['translate_uri_dashes'] = FALSE;
 	API Rroute
 */
 
-
 $route['api/info'] 				= 'api/config/index';
 $route['api/slider/(:any)'] 	= 'api/config/slider/$1';
 $route['api/page/(:any)'] 		= 'api/config/page/$1';
+
+/*
+	validiations
+*/
+$route['adminValidateAccount/(:any)/(:any)']	= 'validiations/adminValidateAccount/$1/$2';
+$route['agentValidateAccount/(:any)/(:any)']	= 'validiations/agentValidateAccount/$1/$2';
