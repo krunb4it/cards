@@ -72,7 +72,7 @@ class Agent_model extends CI_Model {
 					->update("agent"); 
 
 			if($row != false){
-				return $this->db->where("agent_id", $agent_id)->get("agent")->row;
+				return $this->db->where("agent_id", $agent_id)->get("agent")->row();
 			} else {
 				return false;
 			}

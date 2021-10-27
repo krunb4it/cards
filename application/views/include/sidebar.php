@@ -32,12 +32,6 @@
                         <span>اعدادات الموقع</span>
                     </a>
                 </li>
-                <li class="sidebar-item " id="card">
-                    <a href="<?= site_url()?>card" class='sidebar-link'>
-                        <i class="bi bi-credit-card-2-front"></i>
-                        <span> البطاقات الالكترونية </span>
-                    </a>
-                </li>
                 <li class="sidebar-item " id="agent">
                     <a href="<?= site_url()?>agent" class='sidebar-link'>
                         <i class="bi bi-briefcase"></i>
