@@ -54,9 +54,9 @@ class Validiations extends CI_Controller {
 
 				if(!$this->email->send()) {
 					$res = show_error($this->email->print_debugger());
-					// echo  $this->email->print_debugger() ;
+					// echo  $this->email->print_debugger();
 				} 
-				
+ 
 				$this->session->set_flashdata("success", "تم تفعيل حسابكم بنجاح");
 				redirect("agentProfile");
 			} else {
