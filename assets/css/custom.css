@@ -20,7 +20,7 @@
     src: url("../font/DINNEXTLTARABIC-LIGHT.ttf") format("truetype")
 }
 
-*{ 
+*{
     font-weight: normal !important;
 }
 html,
