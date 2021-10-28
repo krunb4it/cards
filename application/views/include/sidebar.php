@@ -32,6 +32,18 @@
                         <span>اعدادات الموقع</span>
                     </a>
                 </li>
+                <li class="sidebar-item " id="category">
+                    <a href="<?= site_url()?>category" class='sidebar-link'>
+                        <i class="bi bi-tags"></i>
+                        <span> التصنيفات </span>
+                    </a>
+                </li>
+                <li class="sidebar-item " id="cards">
+                    <a href="<?= site_url()?>cards" class='sidebar-link'>
+                        <i class="bi bi-credit-card-2-back"></i>
+                        <span> البطاقات الالكترونية </span>
+                    </a>
+                </li>
                 <li class="sidebar-item " id="agent">
                     <a href="<?= site_url()?>agent" class='sidebar-link'>
                         <i class="bi bi-briefcase"></i>
@@ -50,7 +62,7 @@
                         <span>المحفظة</span>
                     </a>
                 </li>
-                <li class="sidebar-item " id="chat">
+                <li class="sidebar-item d-none" id="chat">
                     <a href="<?= site_url()?>chat" class='sidebar-link'>
                         <i class="bi bi-chat-square-text"></i>
                         <span>المراسلات</span>

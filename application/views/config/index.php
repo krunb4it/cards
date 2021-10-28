@@ -83,7 +83,7 @@
 						</div>
 					</a>
 				</div>
-				<div class="col-6 col-lg-3 col-md-6">
+				<div class="col-6 col-lg-3 col-md-6 d-none">
 					<a href="<?= site_url()?>config/language" class="card mb-3">
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center">  
@@ -119,7 +119,7 @@
 						</div>
 					</a>
 				</div>
-				<div class="col-6 col-lg-3 col-md-6">
+				<div class="col-6 col-lg-3 col-md-6 d-none">
 					<a href="<?= site_url()?>config/activites" class="card mb-3">
 						<div class="card-body p-4">
 							<div class="d-flex align-items-center">  

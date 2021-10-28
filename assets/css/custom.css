@@ -86,3 +86,15 @@ ol.example li.placeholder:before {
 position: absolute;
 /** Define arrowhead **/
 }
+
+
+.sidebar-link{
+    display: flex !important;
+    align-items: center !important;
+}
+
+.sidebar-link i{
+    display: inline-block;
+    font-size: 20px;
+    margin-top: .60rem;
+}
