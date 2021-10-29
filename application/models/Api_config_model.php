@@ -9,7 +9,7 @@ class Api_config_model extends CI_Model {
 	
 	/* setting */
 	function get_setting(){
-		return $this->db->get_where("config","config_id = 1")->row();
+		return $this->db->get_where("config","config_id = 1")->result();
 	}
 	  
 	/* page */
@@ -20,7 +20,7 @@ class Api_config_model extends CI_Model {
 		return $this->db
 		->where("page_id", $page_id)
 		->where("page_active", 1)
-		->get("page")->row();
+		->get("page")->result();
 	}
 
 	/* slider */
@@ -31,6 +31,6 @@ class Api_config_model extends CI_Model {
 		return $this->db
 		->where("slider_id", $slider_id)
 		->where("slider_active", 1)
-		->get("slider")->row();
+		->get("slider")->result();
 	}
 }
