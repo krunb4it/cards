@@ -146,6 +146,37 @@ class Config extends RestController{
 		
 	}
 	
+	// get category
+	public function category_get($category_id, $language){
+
+		if($category_id != null){ 
+			$res = $this->api_config_model->get_category($category_id);
+		} else {
+			$res = "Data Not Found ..!!";
+		}
+		
+		if(!empty($res)){
+			$all_data = [];
+
+			for ($i = 0; $i < count($res) ; $i++) {
+				$response = $res[$i];
+				$data = [
+					'category_id'		=> $response->category_id,
+					'category_pic' 		=> $response->category_pic,
+					'category_name'		=> json_decode($response->category_name)->$language,
+					'category_details' 	=> json_decode($response->category_details)->$language,
+					'category_active' 	=> $response->category_active,
+					'category_root' 	=> $response->category_root
+				];
+				$all_data[] = $data;
+			}
+			$this->response( $all_data, 200);
+		} else {
+			$this->response($res, 404);
+		}
+
+	}
+	
 }
 
 

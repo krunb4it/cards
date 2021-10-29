@@ -60,9 +60,10 @@ $route['translate_uri_dashes'] = FALSE;
 	API Rroute
 */
 
-$route['api/info/(:any)']			= 'api/config/info/$1';
-$route['api/slider/(:any)/(:any)'] 	= 'api/config/slider/$1/$2';
-$route['api/page/(:any)/(:any)']	= 'api/config/page/$1/$2';
+$route['api/info/(:any)']				= 'api/config/info/$1';
+$route['api/slider/(:any)/(:any)'] 		= 'api/config/slider/$1/$2';
+$route['api/page/(:any)/(:any)']		= 'api/config/page/$1/$2';
+$route['api/category/(:any)/(:any)']	= 'api/config/category/$1/$2';
 
 /*
 	validiations

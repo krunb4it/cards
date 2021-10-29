@@ -33,4 +33,14 @@ class Api_config_model extends CI_Model {
 		->where("slider_active", 1)
 		->get("slider")->result();
 	}
+
+	
+	/* category */
+	function get_category($category_id){
+		return $this->db
+		->where("category_root", $category_id)
+		->where("category_active", 1)
+		->get_where("category")->result();
+	}
+
 }
