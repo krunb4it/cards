@@ -38,8 +38,8 @@
                         <span> التصنيفات </span>
                     </a>
                 </li>
-                <li class="sidebar-item " id="cards">
-                    <a href="<?= site_url()?>cards" class='sidebar-link'>
+                <li class="sidebar-item " id="card">
+                    <a href="<?= site_url()?>card" class='sidebar-link'>
                         <i class="bi bi-credit-card-2-back"></i>
                         <span> البطاقات الالكترونية </span>
                     </a>

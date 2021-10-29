@@ -7,7 +7,7 @@ class Category_model extends CI_Model {
         parent::__construct();
     }
 	
-	function get_category($root = 0){ 
+	function get_category($root){
 		return $this->db->where("category_root", $root)->get("category")->result(); 
 	}
 

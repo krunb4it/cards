@@ -119,21 +119,6 @@
 			error: function(){ 
 			}
 		});
-	});  
-	
-	// Sortable rows 
-	$('.sorted_table').sortable({
-		update: function(evt, ui) {   
-			$.ajax({ 
-				type: 'POST',
-				url: '<?= site_url()?>category/update_main_category_order',
-				dataType: 'json',
-				data: $('.sorted_table').sortable('serialize'),
-				success: function(res) { 
-					runToastify(res.res);
-				}
-			});
-		}
 	});
 	
 	// remove
