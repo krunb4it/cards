@@ -64,11 +64,10 @@ class Card extends CI_Controller {
 	}
 	
 	public function view_card($card_id = null){
-		if($card_id != null and $card_id > 0){ 
-
+		if($card_id != null and $card_id > 0){
 			$data["category"] = $this->category_model->get_category(0);
 			$data["language"] = $this->config_model->get_language();
-			$data["view"] = $this->card_model->get_card_id($card_id);
+			$data["view"] = $this->card_model->get_card_id($card_id); 
 			$data["page"] = "card/view";
 			$this->load->view('include/temp',$data); 
 		} else {
@@ -98,7 +97,7 @@ class Card extends CI_Controller {
 		
 		$res = $this->card_model->update_card($post, $card_pic);
 		if($res != false){
-			$res = "تم تعديل البطاقة الالكترونية". json_decode($post['card_name'])->ar ." بنجاح ";
+			$res = "تم تعديل البطاقة الالكترونية بنجاح ";
 			$status = "success";
 			$link = site_url()."card";
 		} else {
@@ -143,12 +142,18 @@ class Card extends CI_Controller {
 	}
 
 	function get_sub_category(){
+		$category_root = $this->input->post("category_root", true);
 		$category_id = $this->input->post("category_id", true);
-		$view = $this->category_model->get_category($category_id); 
-		if(!empty($view)){
+		$view = $this->category_model->get_category($category_root);
+		if(!empty($view)){ 
 			$res = '<option value="" seleted disabled></option>';
 			foreach($view as $v){ 
-				$res .= '<option value="'. $v->category_id .'"> '. json_decode($v->category_name)->ar .' </option>';
+					if($category_id == $v->category_id){
+						$selected = "selected";
+					} else{
+						$selected = "";
+					}
+				$res .= '<option value="'. $v->category_id .'"' .$selected .' > '. json_decode($v->category_name)->ar .' </option>';
 			}
 		} else {
 			$res = false;

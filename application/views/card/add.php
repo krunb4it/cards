@@ -180,20 +180,25 @@
 
 	$(".main-catrgory").change( function(){
 		var category_id = $(this).val(); 
+		get_sub_category(category_id, "");
+	});
+
+	function get_sub_category(category_root , category_id){
 		$.ajax({
 			type: "post", 
 			dataType: "html",
 			url: "<?=site_url()?>card/get_sub_category",
 			data: {
-				"category_id" : category_id, 
+				"category_root" : category_root,
+				"category_id" : category_id,
 				"<?=$this->security->get_csrf_token_name();?>":"<?=$this->security->get_csrf_hash();?>"
 			},
 			success: function(res){
 				if(res != false){
-					$("select.sub-category").html(res);
+					$("select.sub-category").html(res).attr("required","required");
 					$(".sub-category-box").removeClass("d-none");
 				} else { 
-					$("select.sub-category").html("");
+					$("select.sub-category").html("").removeAttr("required");
 					$(".sub-category-box").addClass("d-none");
 				}
 			},
@@ -201,5 +206,5 @@
 				Swal.fire("خطأ !!", "حدث خطأ غير متوقع ، يرجى المحاولة مرة اخرى", "error");
 			}
 		});
-	});
+	}
 </script>

@@ -156,10 +156,11 @@ class Category extends CI_Controller {
 			$data["category_id"] = $category_id;
 			$data["page"] = "category/sub/index";
 			$this->load->view('include/temp',$data);
+			/*
 			if(empty($data["view"])){ 
 				$this->session->set_flashdata("error_msg", " خطأ في الرابط ، يرجى التحقق من الرابط المطلوب");
 				redirect("category");
-			}
+			}*/
 			
 		} else {
 			$this->session->set_flashdata("error_msg", " خطأ في الرابط ، يرجى التحقق من الرابط المطلوب");
