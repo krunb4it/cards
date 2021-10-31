@@ -33,14 +33,41 @@ class Api_config_model extends CI_Model {
 		->where("slider_active", 1)
 		->get("slider")->result();
 	}
-
 	
 	/* category */
 	function get_category($category_id){
 		return $this->db
 		->where("category_root", $category_id)
 		->where("category_active", 1)
-		->get_where("category")->result();
+		->get("category")->result();
+	}
+
+	/* card */
+	function card_by_category($category_id){
+		$today = date("Y-m-d");
+		$where = "card_offer_start_date <   and card_offer_end_date > ". date("Y-m-d");
+
+		return $this->db 
+		->where("card.category_id", $category_id)
+		->where("card.card_active", 1)
+		->join("category","category.category_id = card.category_id","left")
+		->get("card")->result();
+	}
+
+	function card_by_id($card_id){
+		return $this->db
+		->where("card.card_active", 1)
+		->where("card.card_id", $card_id)
+		->join("category","category.category_id = card.category_id","left")
+		->get("card")->result();
+
+	} 
+	function card_have_offer($card_id){
+		return $this->db
+		->where("card_id", $card_id)
+		->where("card_offer_start_date <=", date("Y-m-d"))
+		->where("card_offer_end_date >= ", date("Y-m-d"))
+		->get("card_offer")->row();
 	}
 
 }

@@ -174,7 +174,113 @@ class Config extends RestController{
 		} else {
 			$this->response($res, 404);
 		}
+	}
+	
+	// get card by category
+	public function card_by_category_get($category_id, $language){
 
+		if($category_id != null and $category_id > 0){
+			$res = $this->api_config_model->card_by_category($category_id);
+			
+			if(!empty($res)){
+				$all_data = [];
+				for ($i = 0; $i < count($res) ; $i++) {
+					$response = $res[$i];
+	
+					$have_offer = $this->api_config_model->card_have_offer($response->card_id);
+					if(!empty($have_offer)){
+						$card_offer				= 1;
+						$card_offer_start_date	= $have_offer->card_offer_start_date;
+						$card_offer_end_date 	= $have_offer->card_offer_end_date;
+						$card_offer_new_price 	= $have_offer->card_offer_new_price;
+						$card_offer_note 		= $have_offer->card_offer_note;
+					} else {
+						$card_offer				= 0;
+						$card_offer_start_date	= 0;
+						$card_offer_end_date 	= 0;
+						$card_offer_new_price 	= 0;
+						$card_offer_note 		= 0;
+					}
+					$data = [
+						'card_id'			=> $response->card_id,
+						'card_pic' 			=> $response->card_pic,
+						'card_name'			=> json_decode($response->card_name)->$language,
+						'card_note' 		=> json_decode($response->card_note)->$language,
+						'card_amount' 		=> $response->card_amount,
+						'card_price' 		=> $response->card_price,
+						// category 
+						'category_id'		=> $response->category_id,
+						'category_name'		=> json_decode($response->category_name)->$language,
+						// offer 
+						'card_offer' 		=> $card_offer,
+						'offer_start_date' 	=> $card_offer_start_date,
+						'offer_end_date' 	=> $card_offer_end_date,
+						'offer_price' 		=> $card_offer_new_price,
+						'offer_note' 		=> $card_offer_note,
+					];
+					$all_data[] = $data;
+				}
+				$this->response( $all_data, 200);
+			} else {
+				$this->response($res, 404);
+			}
+		} else {
+			$res = "Data Not Found ..!!";
+			$this->response($res, 404);
+		} 
+	}
+	// get card by category
+	public function card_get($card_id, $language){
+
+		if($card_id != null and $card_id > 0){
+			$res = $this->api_config_model->card_by_id($card_id);
+			
+			if(!empty($res)){
+				$all_data = [];
+				for ($i = 0; $i < count($res) ; $i++) {
+					$response = $res[$i];
+
+					$have_offer = $this->api_config_model->card_have_offer($card_id);
+					if(!empty($have_offer)){
+						$card_offer				= 1;
+						$card_offer_start_date	= $have_offer->card_offer_start_date;
+						$card_offer_end_date 	= $have_offer->card_offer_end_date;
+						$card_offer_new_price 	= $have_offer->card_offer_new_price;
+						$card_offer_note 		= $have_offer->card_offer_note;
+					} else {
+						$card_offer				= 0;
+						$card_offer_start_date	= 0;
+						$card_offer_end_date 	= 0;
+						$card_offer_new_price 	= 0;
+						$card_offer_note 		= 0;
+					}
+					$data = [
+						'card_id'			=> $response->card_id,
+						'card_pic' 			=> $response->card_pic,
+						'card_name'			=> json_decode($response->card_name)->$language,
+						'card_note' 		=> json_decode($response->card_note)->$language,
+						'card_amount' 		=> $response->card_amount,
+						'card_price' 		=> $response->card_price,
+						// category 
+						'category_id'		=> $response->category_id,
+						'category_name'		=> json_decode($response->category_name)->$language,
+						// offer 
+						'card_offer' 		=> $card_offer,
+						'offer_start_date' 	=> $card_offer_start_date,
+						'offer_end_date' 	=> $card_offer_end_date,
+						'offer_price' 		=> $card_offer_new_price,
+						'offer_note' 		=> $card_offer_note,
+					];
+					$all_data[] = $data;
+				}
+				$this->response( $all_data, 200);
+			} else {
+				$this->response($res, 404);
+			}
+		} else {
+			$res = "Data Not Found ..!!";
+			$this->response($res, 404);
+		} 
 	}
 	
 }
