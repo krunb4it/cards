@@ -22,14 +22,14 @@ class Card extends CI_Controller {
 	
 	public function index(){
 		$data["view"] = $this->card_model->get_all_card();
-		$data["page"] = "card/index";
+		$data["page"] = "card/definition/index";
 		$this->load->view('include/temp',$data); 
 	}
 	
 	public function new_card(){
 		$data["category"] = $this->category_model->get_category(0);
 		$data["language"] = $this->config_model->get_language();
-		$data["page"] = "card/add";
+		$data["page"] = "card/definition/add";
 		$this->load->view('include/temp',$data);
 	}
 	
@@ -68,7 +68,7 @@ class Card extends CI_Controller {
 			$data["category"] = $this->category_model->get_category(0);
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->card_model->get_card_id($card_id); 
-			$data["page"] = "card/view";
+			$data["page"] = "card/definition/view";
 			$this->load->view('include/temp',$data); 
 		} else {
 			$this->session->set_flashdata("erorr","حدث خطأ ما اثناء التوجيه.");
@@ -91,7 +91,7 @@ class Card extends CI_Controller {
 				$pic = array('upload_data' => $this->upload->data()); 
 				$card_pic = $config['upload_path'].$pic['upload_data']['file_name']; 
 				//remove old pic
-				unlink($post["last_card_pic"]);
+				//unlink($post["last_card_pic"]);
 			}
 		}
 		
@@ -160,6 +160,89 @@ class Card extends CI_Controller {
 		}
 		echo $res;
 	}
+
+	/*------------------------------
+		Charge
+	------------------------------*/
+	
+	public function card_charge($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$data["view"] = $this->card_model->get_card_charge($card_id);
+			$data["card_info"] = $this->card_model->get_card_id($card_id);
+			$data["page"] = "card/charge/card_charge";
+			$this->load->view('include/temp',$data); 
+		}
+	}
+
+	public function add_charge($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$data["card_info"] = $this->card_model->get_card_id($card_id);
+			$data["page"] = "card/charge/add";
+			$this->load->view('include/temp',$data);
+		}
+	}
+
+	public function new_charge(){
+		$post = $this->input->post(null, true);
+		
+		$card_info = $this->card_model->get_card_id($post["card_id"]);
+		$old_amount = $card_info->card_amount;
+		$old_price = $card_info->card_price;
+		$card_id = $this->card_model->new_charge($post, $old_amount, $old_price);
+		if($card_id != false){
+			$res = "تم اضافة رصيد جديد بنجاح";
+			$status = "success";
+			$link = "";
+		} else {
+			$res = "حدث خطأ اثناء حفظ التغيرات ، يرجى المحاولة مرة اخرى";
+			$status = "error";
+			$link = "";
+		}
+		echo json_encode(array("res" => $res, "status" => $status, "link" => $link)); 
+	}
+
+	/*------------------------------
+		Offer
+	------------------------------*/
+	
+	public function card_offer($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$data["view"] = $this->card_model->get_card_offer($card_id);
+			$data["card_info"] = $this->card_model->get_card_id($card_id);
+			$data["have_offer"] = $this->card_model->card_have_offer($card_id);
+			$data["page"] = "card/offer/card_offer";
+			$this->load->view('include/temp',$data);
+		}
+	}
+	public function add_offer($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$have_offer= $this->card_model->card_have_offer($card_id);
+			if(empty($have_offer)){
+				$data["card_info"] = $this->card_model->get_card_id($card_id);
+				$data["page"] = "card/offer/add";
+				$this->load->view('include/temp',$data);
+			} else {
+				redirect("card/card_offer/".$card_id);
+			}
+		}
+	}
+	
+	public function new_offer(){
+		$post = $this->input->post(null, true);
+		
+		$card_id = $this->card_model->new_offer($post);
+		if($card_id != false){
+			$res = "تم اضافة عرض جديد بنجاح";
+			$status = "success";
+			$link = "";
+		} else {
+			$res = "حدث خطأ اثناء حفظ التغيرات ، يرجى المحاولة مرة اخرى";
+			$status = "error";
+			$link = "";
+		}
+		echo json_encode(array("res" => $res, "status" => $status, "link" => $link)); 
+	}
+
 }
 
 

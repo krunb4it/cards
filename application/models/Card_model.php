@@ -57,4 +57,70 @@ class Card_model extends CI_Model {
 	function remove_card_id($card_id){
 		return $this->db->where("card_id", $card_id)->delete("card");
 	}
+
+	/*----------------------------------------
+		Charge card amount
+	----------------------------------------*/ 
+	
+	function get_card_charge($card_id){
+		return $this->db
+		//->order_by("card_charge.card_charge_create_at","DESC")
+		->join("users","users.user_id = card_charge.card_charge_create_by","left")
+		->join("card","card_charge.card_id = card.card_id","left")
+		->where("card_charge.card_id", $card_id)
+		->get("card_charge")->result();
+	}
+	
+	function new_charge($post, $old_amount, $old_price){
+		$arr = array(
+			"card_id"					=> $post["card_id"],
+			"card_charge_amount"		=> $post["card_charge_amount"], 
+			"card_charge_price"			=> $post["card_charge_price"], 
+			"card_charge_total_price"	=> ($post["card_charge_amount"] * $post["card_charge_price"]), 
+			"card_charge_note"			=> nl2br($post["card_charge_note"]),
+			"card_charge_create_by"		=> $this->session->userdata("user_id"), 
+			"card_charge_old_amount"	=> $old_amount, 
+			"card_charge_old_price"		=> $old_price, 
+		);
+
+		$this->db
+			->set("card_amount", ($old_amount + $post["card_charge_amount"]))
+			->set("card_price", $post["card_charge_price"])
+			->where("card_id", $post["card_id"])
+			->update("card");
+
+		return $this->db->insert("card_charge", $arr);
+	}
+	/*----------------------------------------
+		Offer card 
+	----------------------------------------*/ 
+	
+	function get_card_offer($card_id){
+		return $this->db
+		//->order_by("card_charge.card_charge_create_at","DESC")
+		->join("users","users.user_id = card_offer.card_offer_create_by","left")
+		->join("card","card_offer.card_id = card.card_id","left")
+		->where("card_offer.card_id", $card_id)
+		->get("card_offer")->result();
+	}
+	
+	function card_have_offer($card_id){
+		return $this->db
+		->where("card_id", $card_id)
+		->where("card_offer_end_date > ", date("Y-m-d"))
+		->get("card_offer")->result();
+	}
+
+	function new_offer($post){
+		$arr = array(
+			"card_id"					=> $post["card_id"],
+			"card_offer_start_date"		=> $post["card_offer_start_date"],
+			"card_offer_end_date"		=> $post["card_offer_end_date"],
+			"card_offer_old_price"		=> $post["card_offer_old_price"],
+			"card_offer_new_price"		=> $post["card_offer_new_price"],
+			"card_offer_note"			=> $post["card_offer_note"],
+			"card_offer_create_by"		=> $this->session->userdata("user_id")
+		);
+		return $this->db->insert("card_offer", $arr);
+	}
 }

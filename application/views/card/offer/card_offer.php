@@ -6,81 +6,90 @@
 		<div class="page-title mb-3">
 			<div class="row">
 				<div class="col-12 col-md-6 order-md-1 order-last">
-					<h3>البطاقات الالكترونية</h3>
-					<p class="text-subtitle text-muted">عرض كافة البطاقات الالكترونية</p>
+					<h3>العروض</h3>
+					<p class="text-subtitle text-muted">عرض كافة العروض الخاصة بالبطاقة <?= json_decode($card_info->card_name)->ar?></p>
 				</div>
 				<div class="col-12 col-md-6 order-md-2 order-first">
 					<nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="<?= site_url()?>">الرئيسية</a></li>
-							<li class="breadcrumb-item active">البطاقات الالكترونية</li>
+							<li class="breadcrumb-item active">عرض كافة العروض الخاصة بالبطاقة <?= json_decode($card_info->card_name)->ar?></li>
 						</ol>
 					</nav>
 				</div>
 			</div>
 		</div>
 		<div class="page-heading"> 
+			<?php 
+			$btn_class="";
+			if(!empty($have_offer)){
+				$btn_class= "disabled";	
+			?>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="alert alert-warning alert-dismissible">
+						<h4 class="alert-heading">تنويه</h4>
+						<p> يوجد عرض لهذه البطاقة ، لا يمكنك اضافة على البطاقة لحين انتهاء العرض المتوفر حاليا|ً</p>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+			<?php }?>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">البطاقات الالكترونية</h4>
+							<h4 class="card-title">عرض كافة العروض الخاصة بالبطاقة <?= json_decode($card_info->card_name)->ar?></h4>
 							<p class="footer">جلب البيانات في <strong>{elapsed_time}</strong> ثانية.</p>
-							<a class="btn btn-primary" href="<?=site_url()?>card/new_card"> اضافة بطاقة الكترونية جديدة</a>
+							<a class="btn btn-primary <?=$btn_class?>" href="<?=site_url()?>card/add_offer/<?= $card_info->card_id?>" <?=$btn_class?>> اضافة عرض جديد</a>
 						</div>
 						<div class="card-content">
 							<div class="card-body"> 
 								<table class="table mb-0">
-									<tr>
-										<td>الصورة</td>
-										<td>اسم البطاقة الالكترونية</td> 
-										<td>التصنيف</td>
-										<td>الرصيد المتوفر</td>
-										<td>الحد الادنى للطلب</td>
-										<td>وقت الخدمة</td>
-										<td>الحالة</td>
-										<td>تفعيل/ تعطيل</td>
-										<td>خيارات</td>
+									<tr> 
+										<th>بواسطة</th> 
+										<th>تاريخ البداية</th>
+										<th>تاريخ الانتهاء</th>
+										<th>السعر القديم</th>
+										<th>السعر الجديد</th>
+										<th>الحالة</th>
+										<th>ملاحظات</th>
 									</tr>
-									<?php foreach($view as $s){?>
-									<tr id="card_id_<?= $s->card_id;?>">
-										<td width="150"><img src="<?= site_url().$s->card_pic?>" height="50" class="rounded" alt=""></td>
-										<td > <?=  json_decode($s->card_name)->ar?> </td> 
-										<td > <?=  json_decode($s->category_name)->ar?> </td>
-										<td > <?=  $s->card_amount?> </td>
-										<td > <?=  $s->card_min_amount?> </td>
-										<td > <?=  $s->card_time_to_do?> </td>
-										<td width="80">
-											<?php if($s->card_active == 1){
-												$checked = "checked";
-											?>
-												<span class="badge bg-success badge-lang-<?= $s->card_id;?>">مفعل</span>
-											<?php } else{
-												$checked = "";
-											?>
-												<span class="badge bg-danger badge-lang-<?= $s->card_id;?>">غير مفعل</span>
-											<?php }?>
-										</td>
-										<td width="50" class="text-bold-500">
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox" data-id="<?= $s->card_id;?>" value="<?= $s->card_active;?>" <?= $checked ?> >
-											</div>
-										</td>
-										<td width="150" class="text-bold-500">
-											<div class="btn-group">
-												<button class="btn btn-light border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false"> الخيارات
-												</button>
-												<div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
-													<h6 class="dropdown-header"> الخيارات </h6>
-													<a class="dropdown-item" href="#"> حركات الرصيد </a>
-													<a class="dropdown-item" href="#"> حركات الشراء </a>
-													<a class="dropdown-item" href="<?=site_url()?>card/view_card/<?= $s->card_id;?>"> تعديل</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item btn-remove text-danger" href="#" data-id="<?= $s->card_id;?>" data-title="<?= json_decode($s->card_name)->ar?>">حذف</a>
+									<?php foreach($view as $v){?>
+									<tr>  
+										<td >
+											<div class="d-flex">
+												<div class="avatar avatar-lg me-3">
+													<img src="<?= site_url().$v->user_pic?>" alt="" srcset="">
 												</div>
-											</div> 
+												<div>
+													<?=  $v->user_name?> <br>
+													<?=  $v->card_offer_create_at?>
+												</div>
+											</div>
+										</td> 
+										<td > <?=  $v->card_offer_start_date?> </td> 
+										<td > <?=  $v->card_offer_end_date?> </td> 
+										<td > <?=  $v->card_offer_old_price?> </td> 
+										<td > <?=  $v->card_offer_new_price?> </td>
+										<td > 
+											<?php 
+												$date = date("Y-m-d");
+												if($date < $v->card_offer_start_date){ ?>
+												<span class="badge bg-info">ستبدأ قريباً</span>
+											<?php
+												}
+												if( ($date >= $v->card_offer_start_date) and ($date <= $v->card_offer_end_date)){ ?>
+												<span class="badge bg-success"> تحت العرض</span>
+											<?php 
+												} 
+												if($date > $v->card_offer_end_date){ ?>
+												<span class="badge bg-dark"> العرض منتهي</span>
+											<?php 
+												}
+											?>
 										</td>
+										<td > <?=  $v->card_offer_note?> </td>
 									</tr>	
 									<?php }?>
 								</table> 
