@@ -26,7 +26,7 @@ class Config extends RestController{
 			$response = $res[$i];
 			$data = [
 				'slider_id' 		=> $response->slider_id,
-				'slider_cover' 		=> $response->slider_cover,
+				'slider_cover' 		=> site_url().$response->slider_cover,
 				'slider_title'		=> json_decode($response->slider_title)->$language,
 				'slider_sub_title' 	=> json_decode($response->slider_sub_title)->$language,
 				'slider_details' 	=> json_decode($response->slider_details)->$language,
@@ -53,9 +53,9 @@ class Config extends RestController{
 			$response = $res[$i];
 			$data = [
 				'config_id' 			=> $response->config_id,
-				'website_logo' 			=> $response->website_logo,
-				'website_icon' 			=> $response->website_icon,
-				'website_cover'			=> $response->website_cover,
+				'website_logo' 			=> site_url().$response->website_logo,
+				'website_icon' 			=> site_url().$response->website_icon,
+				'website_cover'			=> site_url().$response->website_cover,
 				'website_name'			=> json_decode($response->website_name)->$language,
 				'website_keyword' 		=> json_decode($response->website_keyword)->$language,
 				'website_description'	=> json_decode($response->website_description)->$language,
@@ -90,7 +90,7 @@ class Config extends RestController{
 				$response = $res[$i];
 				$data = [
 					'slider_id' 		=> $response->slider_id,
-					'slider_cover' 		=> $response->slider_cover,
+					'slider_cover' 		=> site_url().$response->slider_cover,
 					'slider_title'		=> json_decode($response->slider_title)->$language,
 					'slider_sub_title' 	=> json_decode($response->slider_sub_title)->$language,
 					'slider_details' 	=> json_decode($response->slider_details)->$language,
@@ -127,7 +127,7 @@ class Config extends RestController{
 				$response = $res[$i];
 				$data = [
 					'page_id'			=> $response->page_id,
-					'page_cover' 		=> $response->page_cover,
+					'page_cover' 		=> site_url().$response->page_cover,
 					'page_title'		=> json_decode($response->page_title)->$language,
 					'page_sub_title' 	=> json_decode($response->page_sub_title)->$language,
 					'page_details'		=> json_decode($response->page_details)->$language,
@@ -162,7 +162,7 @@ class Config extends RestController{
 				$response = $res[$i];
 				$data = [
 					'category_id'		=> $response->category_id,
-					'category_pic' 		=> $response->category_pic,
+					'category_pic' 		=> site_url().$response->category_pic,
 					'category_name'		=> json_decode($response->category_name)->$language,
 					'category_details' 	=> json_decode($response->category_details)->$language,
 					'category_active' 	=> $response->category_active,
@@ -203,7 +203,7 @@ class Config extends RestController{
 					}
 					$data = [
 						'card_id'			=> $response->card_id,
-						'card_pic' 			=> $response->card_pic,
+						'card_pic' 			=> site_url().$response->card_pic,
 						'card_name'			=> json_decode($response->card_name)->$language,
 						'card_note' 		=> json_decode($response->card_note)->$language,
 						'card_amount' 		=> $response->card_amount,
@@ -256,7 +256,7 @@ class Config extends RestController{
 					}
 					$data = [
 						'card_id'			=> $response->card_id,
-						'card_pic' 			=> $response->card_pic,
+						'card_pic' 			=> site_url().$response->card_pic,
 						'card_name'			=> json_decode($response->card_name)->$language,
 						'card_note' 		=> json_decode($response->card_note)->$language,
 						'card_amount' 		=> $response->card_amount,

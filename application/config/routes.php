@@ -49,10 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'Extracard';
 $route['profile'] = 'config/profile';
 $route['profile_validate/(:any)/(:any)'] = 'config/profile_validate/$1/$2';
-$route['404_override'] = 'welcome/error404'; 
+$route['404_override'] = 'welcome/error404';
 $route['translate_uri_dashes'] = FALSE;
 
 
@@ -72,4 +72,25 @@ $route['api/card/(:any)/(:any)']			= 'api/config/card/$1/$2';
 */
 $route['adminValidateAccount/(:any)/(:any)']	= 'validiations/adminValidateAccount/$1/$2';
 $route['agentValidateAccount/(:any)/(:any)']	= 'validiations/agentValidateAccount/$1/$2';
+
+
+
+// front end website
+
+$route['error404']          		= 'extracard/error404';
+$route['view_category']      		= 'extracard/view_category';
+$route['view_sub_category/(:any)']	= 'extracard/view_sub_category/$1';
+$route['view_card/(:any)']          = 'extracard/view_card/$1';
+$route['view_page/(:any)']          = 'extracard/view_page/$1';
+
+$route['viewCart']			= 'extracard/viewCart';
+$route['addToCart']			= 'extracard/addToCart';
+$route['updateToCart']		= 'extracard/updateToCart';
+$route['removeFromCart']	= 'extracard/removeFromCart';
+$route['clearCart']			= 'extracard/clearCart';
+
+
+
+
+
 
