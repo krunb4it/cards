@@ -7,6 +7,8 @@ class Order extends CI_Controller {
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->model('order_model');
+		$this->load->model('customer_model');
+		$this->load->model('card_model');
  
 		if($this->session->userdata("my_token") != $this->security->get_csrf_hash()){
 			redirect("welcome/login");
@@ -18,8 +20,11 @@ class Order extends CI_Controller {
 	}
 	
 	public function index(){
-		$data["view"] = $this->order_model->get_all_order();
-		$data["page"] = "back/order/index";
+		$data["customer"] 	= $this->customer_model->get_all_customer();
+		$data["card"] 		= $this->card_model->get_all_card();
+		$data["status"]		= $this->order_model->get_order_status();
+		$data["view"] 		= $this->order_model->get_all_order();
+		$data["page"] 		= "back/order/index";
 		$this->load->view('include/temp',$data);
 	}
 	public function fillter_order(){
@@ -41,7 +46,18 @@ class Order extends CI_Controller {
 		}
 	}
 
+	public function get_order_filtter(){
+		$post = $this->input->post(null, TRUE);
+		if(!empty($post["order_status_id"])
+			or !empty($post["customer_id"])
+			or !empty($post["card_id"])
+			or !empty($post["date_from"])
+			or !empty($post["date_to"])){
+			$data["view"] = $this->order_model->get_order_filtter($post);
+			$this->load->view("back/order/fillter_tr", $data);
+		} else {
+			$this->session->set_flashdata("error", "الرجاء اختيار احد المعايير لاتمام طلب بحث ناجح");
+			redirect("order");
+		}
+	}
 }
-
-
-

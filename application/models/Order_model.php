@@ -32,8 +32,11 @@ class Order_model extends CI_Model {
 		->get("orders")->row();
 	}
 
-	function fillter_order($data){
+	function get_order_filtter($data){
 		
+		if(!empty($data["order_status_id"])){
+			$this->db->where("orders.order_status_id", $data["order_status_id"]);
+		}
 		if(!empty($data["customer_id"])){
 			$this->db->where("orders.customer_id", $data["customer_id"]);
 		}
@@ -48,6 +51,6 @@ class Order_model extends CI_Model {
 		$this->db->join("customer","customer.customer_id = orders.customer_id","left");
 		$this->db->join("card","card.card_id = orders.card_id","left");
 		$this->db->join("order_status","order_status.order_status_id = orders.order_status_id","left");
-		$this->db->get("orders")->result();
+		return $this->db->get("orders")->result();
 	}
 }
