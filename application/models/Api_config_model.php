@@ -60,8 +60,8 @@ class Api_config_model extends CI_Model {
 		->where("card.card_id", $card_id)
 		->join("category","category.category_id = card.category_id","left")
 		->get("card")->result();
-
-	} 
+	}
+	
 	function card_have_offer($card_id){
 		return $this->db
 		->where("card_id", $card_id)

@@ -44,14 +44,14 @@
                         <span> البطاقات الالكترونية </span>
                     </a>
                 </li>
-                <li class="sidebar-item " id="agent">
-                    <a href="<?= site_url()?>agent" class='sidebar-link'>
+                <li class="sidebar-item " id="customer">
+                    <a href="<?= site_url()?>customer" class='sidebar-link'>
                         <i class="bi bi-briefcase"></i>
-                        <span> الوكلاء </span>
+                        <span> الزبائن </span>
                     </a>
                 </li>
-                <li class="sidebar-item " id="cart">
-                    <a href="<?= site_url()?>cart" class='sidebar-link'>
+                <li class="sidebar-item " id="order">
+                    <a href="<?= site_url()?>order" class='sidebar-link'>
                         <i class="bi bi-cart2"></i>
                         <span> طلبات الشراء </span>
                     </a>

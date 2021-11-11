@@ -455,8 +455,13 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = false;
 $config['csrf_exclude_uris'] = array(
 	"config/update_page_order",
-	"config/update_slider_order"
-	);
+	"config/update_slider_order",
+	"auth/do_auth",
+	"auth/forget_password",
+	"auth/change_password",
+	"customer/create_order",
+	"customer/my_order",
+);
 
 /*
 |--------------------------------------------------------------------------

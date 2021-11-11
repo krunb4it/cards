@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Extracard';
+$route['default_controller'] = 'welcome';
 $route['profile'] = 'config/profile';
 $route['profile_validate/(:any)/(:any)'] = 'config/profile_validate/$1/$2';
 $route['404_override'] = 'welcome/error404';
@@ -67,11 +67,18 @@ $route['api/category/(:any)/(:any)']		= 'api/config/category/$1/$2';
 $route['api/category_card/(:any)/(:any)']	= 'api/config/card_by_category/$1/$2';
 $route['api/card/(:any)/(:any)']			= 'api/config/card/$1/$2';
 
+$route['auth/do_auth']						= 'api/auth/do_auth';
+$route['auth/forget_password']				= 'api/auth/forget_password';
+$route['auth/change_password']				= 'api/auth/change_password';
+
+$route['customer/create_order']				= 'api/customer/create_order';
+$route['customer/my_order']					= 'api/customer/my_order';
+
 /*
 	validiations
 */
 $route['adminValidateAccount/(:any)/(:any)']	= 'validiations/adminValidateAccount/$1/$2';
-$route['agentValidateAccount/(:any)/(:any)']	= 'validiations/agentValidateAccount/$1/$2';
+$route['customerValidateAccount/(:any)/(:any)']	= 'validiations/customerValidateAccount/$1/$2';
 
 
 
@@ -90,7 +97,13 @@ $route['removeFromCart']	= 'extracard/removeFromCart';
 $route['clearCart']			= 'extracard/clearCart';
 
 
+/*
+	customerProfile
 
+
+$route['customerProfile']			= 'validiations/customerProfile';
+
+*/
 
 
 

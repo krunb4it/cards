@@ -19,73 +19,73 @@ class Config extends CI_Controller {
 	}
 	
 	public function index(){
-		$data["page"] = "config/index";
+		$data["page"] = "back/config/index";
 		$this->load->view('include/temp',$data); 
 	}
 	public function profile(){
 		$data["admin_group"] = $this->config_model->get_admin_group();
-		$data["page"] = "config/profile/index";
+		$data["page"] = "back/config/profile/index";
 		$this->load->view('include/temp',$data);
 	}
 	public function setting(){ 
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_setting();
-		$data["page"] = "config/setting/index";
+		$data["page"] = "back/config/setting/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function contact(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_setting();
-		$data["page"] = "config/contact/index";
+		$data["page"] = "back/config/contact/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function social_media(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_setting();
-		$data["page"] = "config/social_media/index";
+		$data["page"] = "back/config/social_media/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function page(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_page();
-		$data["page"] = "config/page/index";
+		$data["page"] = "back/config/page/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function payment_way(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_payment_way();
-		$data["page"] = "config/payment_way/index";
+		$data["page"] = "back/config/payment_way/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function slider(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_slider();
-		$data["page"] = "config/slider/index";
+		$data["page"] = "back/config/slider/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function language(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_language();
-		$data["page"] = "config/language/index";
+		$data["page"] = "back/config/language/index";
 		$this->load->view('include/temp',$data);  
 	}
 	
 	public function users(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_users();
-		$data["page"] = "config/users/index";
+		$data["page"] = "back/config/users/index";
 		$this->load->view('include/temp',$data);  
 	}
 	public function currency(){ 
 		$data["view"] = $this->config_model->get_currency();
-		$data["page"] = "config/currency/index";
+		$data["page"] = "back/config/currency/index";
 		$this->load->view('include/temp',$data);
 	}
 	
 	public function activites(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->config_model->get_activites();
-		$data["page"] = "config/activites/index";
+		$data["page"] = "back/config/activites/index";
 		$this->load->view('include/temp',$data);  
 	}
 	
@@ -176,7 +176,7 @@ class Config extends CI_Controller {
 		if($page_id != null){
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->config_model->get_page_id($page_id);
-			$data["page"] = "config/page/view";
+			$data["page"] = "back/config/page/view";
 			$this->load->view('include/temp',$data); 
 		}
 	} 
@@ -247,7 +247,7 @@ class Config extends CI_Controller {
 	
 	public function new_slider(){  
 		$data["language"] = $this->config_model->get_language();
-		$data["page"] = "config/slider/add";
+		$data["page"] = "back/config/slider/add";
 		$this->load->view('include/temp',$data);  
 	}
 	
@@ -255,7 +255,7 @@ class Config extends CI_Controller {
 		if($slider_id != null){
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->config_model->get_slider_id($slider_id);
-			$data["page"] = "config/slider/view";
+			$data["page"] = "back/config/slider/view";
 			$this->load->view('include/temp',$data); 
 		}
 	}
@@ -369,7 +369,7 @@ class Config extends CI_Controller {
 	
 	public function new_payment_way(){  
 		$data["language"] = $this->config_model->get_language();
-		$data["page"] = "config/payment_way/add";
+		$data["page"] = "back/config/payment_way/add";
 		$this->load->view('include/temp',$data);  
 	}
 	
@@ -377,7 +377,7 @@ class Config extends CI_Controller {
 		if($payment_way_id != null){
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->config_model->get_payment_way_id($payment_way_id);
-			$data["page"] = "config/payment_way/view";
+			$data["page"] = "back/config/payment_way/view";
 			$this->load->view('include/temp',$data); 
 		}
 	}
@@ -491,7 +491,7 @@ class Config extends CI_Controller {
 	
 	public function new_user(){
 		$data["admin_group"] = $this->config_model->get_admin_group();
-		$data["page"] = "config/users/add";
+		$data["page"] = "back/config/users/add";
 		$this->load->view('include/temp',$data);  
 	}
 	
@@ -499,7 +499,7 @@ class Config extends CI_Controller {
 		if($user_id != null){
 			$data["admin_group"] = $this->config_model->get_admin_group();
 			$data["view"] = $this->config_model->get_user_id($user_id);
-			$data["page"] = "config/users/view";
+			$data["page"] = "back/config/users/view";
 			$this->load->view('include/temp',$data); 
 		}
 	} 
@@ -706,14 +706,14 @@ class Config extends CI_Controller {
 	
 	public function add_currency(){
         $data["language"] = $this->config_model->get_language(); 
-        $data["page"] = "config/currency/add";
+        $data["page"] = "back/config/currency/add";
         $this->load->view('include/temp',$data); 
 	} 
 	public function view_currency($currency_id = null){ 
 		if($currency_id != null){
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->config_model->get_currency_id($currency_id);
-			$data["page"] = "config/currency/view";
+			$data["page"] = "back/config/currency/view";
 			$this->load->view('include/temp',$data); 
 		} else {
             redirect("congif/currency");

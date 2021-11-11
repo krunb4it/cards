@@ -22,7 +22,7 @@ class Category extends CI_Controller {
 	public function index(){
 		$data["language"] = $this->config_model->get_language();
 		$data["view"] = $this->category_model->get_category(0);
-		$data["page"] = "category/main/index";
+		$data["page"] = "back/category/main/index";
 		$this->load->view('include/temp',$data);
 	} 
 
@@ -30,14 +30,14 @@ class Category extends CI_Controller {
 		if($category_id != null){
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->category_model->get_category_id($category_id);
-			$data["page"] = "category/main/view";
+			$data["page"] = "back/category/main/view";
 			$this->load->view('include/temp',$data); 
 		}
 	}
 
 	public function new_category(){
 		$data["language"] = $this->config_model->get_language();
-		$data["page"] = "category/main/add";
+		$data["page"] = "back/category/main/add";
 		$this->load->view('include/temp',$data);  
 	}
 
@@ -154,14 +154,8 @@ class Category extends CI_Controller {
 			$category_name = $this->category_model->get_category_id($category_id);
 			$data["category_name"] = json_decode($category_name->category_name)->ar;
 			$data["category_id"] = $category_id;
-			$data["page"] = "category/sub/index";
+			$data["page"] = "back/category/sub/index";
 			$this->load->view('include/temp',$data);
-			/*
-			if(empty($data["view"])){ 
-				$this->session->set_flashdata("error_msg", " خطأ في الرابط ، يرجى التحقق من الرابط المطلوب");
-				redirect("category");
-			}*/
-			
 		} else {
 			$this->session->set_flashdata("error_msg", " خطأ في الرابط ، يرجى التحقق من الرابط المطلوب");
 			redirect("category");
@@ -173,7 +167,7 @@ class Category extends CI_Controller {
 			$data["language"] = $this->config_model->get_language();
 			$data["category"] = $this->category_model->get_category(0);
 			$data["view"] = $this->category_model->get_category_id($category_id);
-			$data["page"] = "category/sub/view";
+			$data["page"] = "back/category/sub/view";
 			$this->load->view('include/temp',$data); 
 			
 			if(empty($data["view"])){ 
@@ -190,7 +184,7 @@ class Category extends CI_Controller {
 		$data["language"] = $this->config_model->get_language();
 		$data["category"] = $this->category_model->get_category(0);
 		$data["view"] = $this->category_model->get_category_id($category_id);
-		$data["page"] = "category/sub/add";
+		$data["page"] = "back/category/sub/add";
 		$this->load->view('include/temp',$data);
 	}
 }

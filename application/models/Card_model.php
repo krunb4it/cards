@@ -21,7 +21,7 @@ class Card_model extends CI_Model {
 		return $this->db
 		->join("category","category.category_id = card.category_id","left")
 		->where("card_id", $card_id)->get("card")->row();
-	} 
+	}
 	
 	function add_card($post, $card_pic){
 		$arr = array(
@@ -31,6 +31,8 @@ class Card_model extends CI_Model {
 			"card_time_to_do"	=> $post["card_time_to_do"],
 			"category_id"		=> $post["category_id"],
 			"card_min_amount"	=> $post["card_min_amount"],
+			"card_price"		=> $post["card_price"],
+			"need_approval"		=> $post["need_approval"],
 			"card_active"		=> 0,
 			"card_create_by"	=> $this->session->userdata("user_id"),
 		); 
@@ -45,7 +47,9 @@ class Card_model extends CI_Model {
 			"card_note"			=> json_encode($post["card_note"]),
 			"card_time_to_do"	=> $post["card_time_to_do"],
 			"category_id"		=> $post["category_id"],
-			"card_min_amount"	=> $post["card_min_amount"]
+			"card_min_amount"	=> $post["card_min_amount"],
+			"card_price"		=> $post["card_price"],
+			"need_approval"		=> $post["need_approval"],
 		); 
 		return $this->db->where("card_id", $post["card_id"])->update("card", $arr);
 	}
@@ -60,7 +64,7 @@ class Card_model extends CI_Model {
 
 	/*----------------------------------------
 		Charge card amount
-	----------------------------------------*/ 
+	----------------------------------------
 	
 	function get_card_charge($card_id){
 		return $this->db
@@ -91,6 +95,7 @@ class Card_model extends CI_Model {
 
 		return $this->db->insert("card_charge", $arr);
 	}
+*/ 
 	/*----------------------------------------
 		Offer card 
 	----------------------------------------*/ 
@@ -122,5 +127,40 @@ class Card_model extends CI_Model {
 			"card_offer_create_by"		=> $this->session->userdata("user_id")
 		);
 		return $this->db->insert("card_offer", $arr);
+	}
+
+	/*----------------------------------------
+		item card 
+	----------------------------------------*/ 
+	
+	function get_card_item($card_id){
+		return $this->db
+		->order_by("card_item.card_item_at","DESC")
+		->join("users","users.user_id = card_item.card_item_by","left")
+		->join("card","card_item.card_id = card.card_id","left")
+		->where("card_item.card_id", $card_id)
+		->get("card_item")->result();
+	}
+
+	function add_card_item($post){
+
+		$old_amount = $this->db->where("card_id", $post["card_id"])->get("card")->row()->card_amount;
+		$this->db
+			->set("card_amount", ($old_amount + 1))
+			->where("card_id", $post["card_id"])
+			->update("card");
+
+		$arr = array(
+			"card_id"				=> $post["card_id"],
+			"card_item_code"		=> $post["card_item_code"],
+			"card_item_reference"	=> $post["card_item_reference"],
+			"card_item_serial"		=> $post["card_item_serial"],
+			"card_item_end"			=> $post["card_item_end"],
+			"card_item_used"		=> 0,
+			"card_item_by"			=> $this->session->userdata("user_id")
+		);
+		return $this->db->insert("card_item", $arr);
+		 
+		
 	}
 }

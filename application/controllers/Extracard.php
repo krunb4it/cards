@@ -21,8 +21,6 @@ class Extracard extends CI_Controller {
 		$data["page"] = "front/index";
 		$this->load->view('front/include/temp',$data);
 	}
-
- 
 	
 	// view main category 
 	public function view_category(){
@@ -31,8 +29,8 @@ class Extracard extends CI_Controller {
 		$data["page"] 		= "front/category/category_main";
 		$this->load->view('front/include/temp',$data);
 		
-	} 
-	
+	}
+
 	// view sub category 
 	public function view_sub_category($category_id){ 
 		if($category_id != null and $category_id > 0){
@@ -174,6 +172,7 @@ class Extracard extends CI_Controller {
 	/*
 		Cart user
 	*/
+
 	function viewCart(){ 
 		$data["page"]	= "front/cart/view_cart";
 		$this->load->view('front/include/temp',$data);
@@ -235,7 +234,6 @@ class Extracard extends CI_Controller {
 		}   
 		echo json_encode(array("res" => $res, "status" => $status, "link" => $link));
 	}
-	
 }
 
 

@@ -22,14 +22,14 @@ class Card extends CI_Controller {
 	
 	public function index(){
 		$data["view"] = $this->card_model->get_all_card();
-		$data["page"] = "card/definition/index";
+		$data["page"] = "back/card/definition/index";
 		$this->load->view('include/temp',$data); 
 	}
 	
 	public function new_card(){
 		$data["category"] = $this->category_model->get_category(0);
 		$data["language"] = $this->config_model->get_language();
-		$data["page"] = "card/definition/add";
+		$data["page"] = "back/card/definition/add";
 		$this->load->view('include/temp',$data);
 	}
 	
@@ -68,7 +68,7 @@ class Card extends CI_Controller {
 			$data["category"] = $this->category_model->get_category(0);
 			$data["language"] = $this->config_model->get_language();
 			$data["view"] = $this->card_model->get_card_id($card_id); 
-			$data["page"] = "card/definition/view";
+			$data["page"] = "back/card/definition/view";
 			$this->load->view('include/temp',$data); 
 		} else {
 			$this->session->set_flashdata("erorr","حدث خطأ ما اثناء التوجيه.");
@@ -169,7 +169,7 @@ class Card extends CI_Controller {
 		if($card_id  != null and $card_id > 0){
 			$data["view"] = $this->card_model->get_card_charge($card_id);
 			$data["card_info"] = $this->card_model->get_card_id($card_id);
-			$data["page"] = "card/charge/card_charge";
+			$data["page"] = "back/card/charge/card_charge";
 			$this->load->view('include/temp',$data); 
 		}
 	}
@@ -177,7 +177,7 @@ class Card extends CI_Controller {
 	public function add_charge($card_id = null){
 		if($card_id  != null and $card_id > 0){
 			$data["card_info"] = $this->card_model->get_card_id($card_id);
-			$data["page"] = "card/charge/add";
+			$data["page"] = "back/card/charge/add";
 			$this->load->view('include/temp',$data);
 		}
 	}
@@ -210,7 +210,7 @@ class Card extends CI_Controller {
 			$data["view"] = $this->card_model->get_card_offer($card_id);
 			$data["card_info"] = $this->card_model->get_card_id($card_id);
 			$data["have_offer"] = $this->card_model->card_have_offer($card_id);
-			$data["page"] = "card/offer/card_offer";
+			$data["page"] = "back/card/offer/card_offer";
 			$this->load->view('include/temp',$data);
 		}
 	}
@@ -219,7 +219,7 @@ class Card extends CI_Controller {
 			$have_offer= $this->card_model->card_have_offer($card_id);
 			if(empty($have_offer)){
 				$data["card_info"] = $this->card_model->get_card_id($card_id);
-				$data["page"] = "card/offer/add";
+				$data["page"] = "back/card/offer/add";
 				$this->load->view('include/temp',$data);
 			} else {
 				redirect("card/card_offer/".$card_id);
@@ -240,6 +240,55 @@ class Card extends CI_Controller {
 			$status = "error";
 			$link = "";
 		}
+		echo json_encode(array("res" => $res, "status" => $status, "link" => $link)); 
+	}
+
+	/*------------------------------
+		card_item
+	------------------------------*/
+	
+	public function card_item($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$data["view"] = $this->card_model->get_card_item($card_id);
+			$data["card_info"] = $this->card_model->get_card_id($card_id);
+			$data["page"] = "back/card/item/index";
+			$this->load->view('include/temp',$data);
+		} else {
+			redirect("welcome/error404");
+		}
+	}
+
+	public function new_card_item($card_id = null){
+		if($card_id  != null and $card_id > 0){
+			$data["card_info"] = $this->card_model->get_card_id($card_id);
+			$data["page"] = "back/card/item/add";
+			$this->load->view('include/temp',$data);
+		} else {
+			redirect("welcome/error404");
+		}
+	}
+	
+	public function add_card_item(){
+		$post = $this->input->post(null, true);
+		
+		$this->form_validation->set_rules('card_item_code', 'كود البطاقة', 'trim|required|is_unique[card_item.card_item_code]');
+		if ($this->form_validation->run() == FALSE) {
+			$res = validation_errors('<div class="text-danger">', '</div>');
+			$status = "error";
+			$link = "";
+		} else {
+			$row = $this->card_model->add_card_item($post);
+			if($row != false){
+				$res = "تم اضافة بطاقة جديدة بنجاح";
+				$status = "success";
+				$link = "";
+			} else {
+				$res = "حدث خطأ اثناء حفظ التغيرات ، يرجى المحاولة مرة اخرى";
+				$status = "error";
+				$link = "";
+			}
+		}
+		
 		echo json_encode(array("res" => $res, "status" => $status, "link" => $link)); 
 	}
 
