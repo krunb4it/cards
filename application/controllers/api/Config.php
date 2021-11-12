@@ -261,6 +261,7 @@ class Config extends RestController{
 						'card_note' 		=> json_decode($response->card_note)->$language,
 						'card_amount' 		=> $response->card_amount,
 						'card_price' 		=> $response->card_price,
+						'need_approval'		=> $response->need_approval,
 						// category 
 						'category_id'		=> $response->category_id,
 						'category_name'		=> json_decode($response->category_name)->$language,

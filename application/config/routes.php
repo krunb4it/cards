@@ -72,7 +72,9 @@ $route['auth/forget_password']				= 'api/auth/forget_password';
 $route['auth/change_password']				= 'api/auth/change_password';
 
 $route['customer/create_order']				= 'api/customer/create_order';
-$route['customer/my_order']					= 'api/customer/my_order';
+$route['customer/my_order/(:any)']			= 'api/customer/my_order/$1';
+$route['customer/my_wallet']				= 'api/customer/my_wallet';
+$route['customer/notifications']			= 'api/customer/notifications';
 
 /*
 	validiations

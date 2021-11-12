@@ -111,4 +111,15 @@ class Api_customer_model extends CI_Model {
 			return false;
 		}
 	}
+
+
+	function get_my_order($customer_id){
+		return $this->db
+			//->limit($limit, $offset)
+			->order_by("o.order_create_at", "DESC")
+			->where("o.customer_id" , $customer_id)
+			->join("order_status os"," os.order_status_id = o.order_status_id","left")
+			->join("card c"," c.card_id = o.card_id","left")
+			->get("orders o")->result();
+	}
 }
