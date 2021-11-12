@@ -80,12 +80,14 @@ $route['auth/change_password']				= 'api/auth/change_password';
 /*-------------------------------------------
 	Customer
 -------------------------------------------*/
-$route['customer/my_info']					= 'api/customer/my_info';
-$route['customer/create_order']				= 'api/customer/create_order';
-$route['customer/my_order/(:any)']			= 'api/customer/my_order/$1';
-$route['customer/my_order_card/(:any)']		= 'api/customer/my_order_card/$1';
-$route['customer/my_wallet']				= 'api/customer/my_wallet';
-$route['customer/my_notifications']			= 'api/customer/my_notifications';
+$route['customer/my_info']						= 'api/customer/my_info';
+$route['customer/create_order']					= 'api/customer/create_order';
+$route['customer/my_order/(:any)']				= 'api/customer/my_order/$1';
+$route['customer/my_order_id/(:any)/(:any)']	= 'api/customer/my_order_id/$1/$2';
+$route['customer/my_order_card/(:any)']			= 'api/customer/my_order_card/$1';
+$route['customer/my_wallet']					= 'api/customer/my_wallet';
+$route['customer/my_notifications']				= 'api/customer/my_notifications';
+$route['customer/print_order_card']				= 'api/customer/print_order_card';
 
 /*
 	validiations

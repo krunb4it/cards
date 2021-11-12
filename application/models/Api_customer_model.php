@@ -122,6 +122,15 @@ class Api_customer_model extends CI_Model {
 			->join("card c"," c.card_id = o.card_id","left")
 			->get("orders o")->result();
 	}
+
+	function get_my_order_id($customer_id, $order_id){
+		return $this->db
+			->where("o.customer_id" , $customer_id)
+			->where("o.order_id" , $order_id)
+			->join("order_status os"," os.order_status_id = o.order_status_id","left")
+			->join("card c"," c.card_id = o.card_id","left")
+			->get("orders o")->result();
+	}
 	
 	function get_my_order_card($customer_id, $order_id){
 		return $this->db
@@ -144,5 +153,13 @@ class Api_customer_model extends CI_Model {
 			->order_by("notification_create_at", "DESC")
 			->where("customer_id" , $customer_id)
 			->get("notifications")->result();
+	}
+
+	function print_order_item_id($order_item_id){
+		return $this->db
+			->set("order_item_print", 1)
+			->set("order_item_print_at", date("Y-m-d H:i:s"))
+			->where("order_item_id" , $order_item_id)
+			->update("order_item");
 	}
 }

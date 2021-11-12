@@ -461,6 +461,7 @@ $config['csrf_exclude_uris'] = array(
 	"auth/change_password",
 	"customer/create_order",
 	"customer/my_order",
+	"customer/print_order_card",
 );
 
 /*

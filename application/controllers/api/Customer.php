@@ -97,6 +97,59 @@ class Customer extends RestController
 		}
 	}
 
+	function my_order_id_get($order_id, $language){
+		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
+		$headers = array();
+		foreach (getallheaders() as $name => $value) {
+			$headers[$name] = $value;
+		}
+		if (isset($headers["Authorization"])){
+			$auth = explode(" ", $headers["Authorization"]);
+			if (count($auth) == 2) {
+				$flag = $auth[0];
+				$token = $auth[1];
+			}
+
+			$get_customer_info = $this->api_customer_model->get_customer_id($token);
+
+			if ($get_customer_info != false) {
+				$res = $this->api_customer_model->get_my_order_id($get_customer_info->customer_id, $order_id);
+			
+				$all_data = [];
+				for ($i = 0; $i < count($res); $i++) {
+					$response = $res[$i];
+					$data = [
+						'order_id' 				=> $response->order_id,
+						'order_create_at' 		=> $response->order_create_at,
+						'order_status_id'		=> $response->order_status_id,
+						'order_status_name' 	=> $response->order_status_name,
+						'customer_id' 			=> $response->customer_id,
+						'card_id' 				=> $response->card_id,
+						'card_pic' 				=> site_url().$response->card_pic,
+						'card_name'				=> json_decode($response->card_name)->$language,
+						'card_note' 			=> json_decode($response->card_note)->$language,
+						'quantity'				=> $response->quantity,
+						'price' 				=> $response->price,
+						'total' 				=> $response->total,
+						'note' 					=> $response->note,
+					];
+					$all_data[] = $data;
+				}
+				$this->response($all_data, 200);
+			} else {
+				$this->response([
+					"status" => false,
+					"message" => "The token is not definde."
+				], RestController::HTTP_BAD_REQUEST);
+			}
+		} else {
+			$this->response([
+				"status" => false,
+				"message" => "The token is required."
+			], RestController::HTTP_BAD_REQUEST);
+		}
+	}
+
 	function my_order_card_get($order_id){
 		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
 		$headers = array();
@@ -133,6 +186,48 @@ class Customer extends RestController
 					$all_data[] = $data;
 				}
 				$this->response($all_data, 200);
+			} else {
+				$this->response([
+					"status" => false,
+					"message" => "The token is not definde."
+				], RestController::HTTP_BAD_REQUEST);
+			}
+		} else {
+			$this->response([
+				"status" => false,
+				"message" => "The token is required."
+			], RestController::HTTP_BAD_REQUEST);
+		}
+	}
+	function print_order_card_post(){
+		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
+		$headers = array();
+		foreach (getallheaders() as $name => $value) {
+			$headers[$name] = $value;
+		}
+		if (isset($headers["Authorization"])){
+			$auth = explode(" ", $headers["Authorization"]);
+			if (count($auth) == 2) {
+				$flag = $auth[0];
+				$token = $auth[1];
+			}
+
+			$get_customer_info = $this->api_customer_model->get_customer_id($token);
+
+			if ($get_customer_info != false) {
+				$order_item_id = $this->input->post("order_item_id", TRUE);
+				$res = $this->api_customer_model->print_order_item_id($order_item_id);
+				if($res != false){
+					$this->response([
+						"status" => TRUE,
+						"message" => "تم تحديث حالة البطاقة"
+					], RestController::HTTP_OK);
+				} else {
+					$this->response([
+						"status" => FALSE,
+						"message" => "حدث خطأ ما ، يرجى المحاولة مرة اخرى"
+					], RestController::HTTP_BAD_REQUEST);
+				}
 			} else {
 				$this->response([
 					"status" => false,
