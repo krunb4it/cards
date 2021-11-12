@@ -44,8 +44,7 @@ class Customer extends RestController
 		$this->response($all_data, 200);
 	}
 
-	function my_order_get($language)
-	{
+	function my_order_get($language){
 		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
 		$headers = array();
 		foreach (getallheaders() as $name => $value) {
@@ -99,8 +98,7 @@ class Customer extends RestController
 		}
 	}
 
-	function create_order_post()
-	{
+	function create_order_post(){
 		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
 		$headers = array();
 		foreach (getallheaders() as $name => $value) {
@@ -180,6 +178,60 @@ class Customer extends RestController
 			$this->response([
 				"status" => false,
 				"message" => "The token is not definde."
+			], RestController::HTTP_BAD_REQUEST);
+		}
+	}
+
+	
+	function my_wallet_get(){
+		// $customer_token = "7abbdf1dc93521801be40ca5f814bb99";
+		$headers = array();
+		foreach (getallheaders() as $name => $value) {
+			$headers[$name] = $value;
+		}
+
+		if (isset($headers["Authorization"])){
+			$auth = explode(" ", $headers["Authorization"]);
+			if (count($auth) == 2) {
+				$flag = $auth[0];
+				$token = $auth[1];
+			}
+
+			$get_customer_info = $this->api_customer_model->get_customer_id($token);
+
+			if ($get_customer_info != false){
+				$res = $this->api_customer_model->get_my_wallet($get_customer_info->customer_id);
+				
+				$all_data = [];
+				for ($i = 0; $i < count($res); $i++) {
+					$response = $res[$i];
+					if( $response->customer_wallet_type_id == 1 ){
+						$type_name = "شحن";
+					} else {
+						$type_name = "شراء";
+					}
+					$data = [
+						'type_name'			=> $type_name,
+						'type_id'			=> $response->customer_wallet_type_id,
+						'old_balance'		=> $response->customer_wallet_old_balance,
+						'new_balance'		=> $response->customer_wallet_new_balance,
+						'total_balance'		=> $response->customer_wallet_total_balance,
+						'create_at'			=> $response->customer_wallet_create_at,
+						'order_id'			=> $response->order_id
+					];
+					$all_data[] = $data;
+				}
+				$this->response($all_data, 200);
+			} else {
+				$this->response([
+					"status" => false,
+					"message" => "The token is not definde."
+				], RestController::HTTP_BAD_REQUEST);
+			}
+		} else {
+			$this->response([
+				"status" => false,
+				"message" => "The token is required."
 			], RestController::HTTP_BAD_REQUEST);
 		}
 	}

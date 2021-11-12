@@ -122,4 +122,11 @@ class Api_customer_model extends CI_Model {
 			->join("card c"," c.card_id = o.card_id","left")
 			->get("orders o")->result();
 	}
+
+	function get_my_wallet($customer_id){
+		return $this->db
+			->order_by("customer_wallet_create_at", "DESC")
+			->where("customer_id" , $customer_id)
+			->get("customer_wallet")->result();
+	}
 }
