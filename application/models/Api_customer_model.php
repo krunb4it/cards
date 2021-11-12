@@ -122,11 +122,27 @@ class Api_customer_model extends CI_Model {
 			->join("card c"," c.card_id = o.card_id","left")
 			->get("orders o")->result();
 	}
+	
+	function get_my_order_card($customer_id, $order_id){
+		return $this->db
+			->where("o.customer_id" , $customer_id)
+			->where("oi.order_id" , $order_id)
+			->join("orders o"," o.order_id = oi.order_id","left")
+			->join("card_item ci"," oi.card_item_id = ci.card_item_id","left")
+			->get("order_item oi")->result();
+	}
 
 	function get_my_wallet($customer_id){
 		return $this->db
 			->order_by("customer_wallet_create_at", "DESC")
 			->where("customer_id" , $customer_id)
 			->get("customer_wallet")->result();
+	}
+
+	function get_my_notifications($customer_id){
+		return $this->db
+			->order_by("notification_create_at", "DESC")
+			->where("customer_id" , $customer_id)
+			->get("notifications")->result();
 	}
 }

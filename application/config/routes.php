@@ -71,10 +71,11 @@ $route['auth/do_auth']						= 'api/auth/do_auth';
 $route['auth/forget_password']				= 'api/auth/forget_password';
 $route['auth/change_password']				= 'api/auth/change_password';
 
-$route['customer/create_order']				= 'api/customer/create_order';
-$route['customer/my_order/(:any)']			= 'api/customer/my_order/$1';
-$route['customer/my_wallet']				= 'api/customer/my_wallet';
-$route['customer/notifications']			= 'api/customer/notifications';
+$route['customer/create_order']					= 'api/customer/create_order';
+$route['customer/my_order/(:any)']				= 'api/customer/my_order/$1';
+$route['customer/my_order_card/(:any)']	= 'api/customer/my_order_card/$1';
+$route['customer/my_wallet']					= 'api/customer/my_wallet';
+$route['customer/my_notifications']				= 'api/customer/my_notifications';
 
 /*
 	validiations
