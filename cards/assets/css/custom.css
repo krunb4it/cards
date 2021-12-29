@@ -1,0 +1,139 @@
+
+@font-face {
+    font-family: "black";
+    src: url("../font/DINNextLTArabic-Black.ttf") format("truetype")
+}
+@font-face {
+    font-family: "bold";
+    src: url("../font/DINNextLTArabic-Bold.ttf") format("truetype")
+}
+@font-face {
+    font-family: "medium";
+    src: url("../font/DINNextLTArabic-Medium.ttf") format("truetype")
+}
+@font-face {
+    font-family: "regular";
+    src: url("../font/DINNextLTArabic-Regular.ttf") format("truetype")
+}
+@font-face {
+    font-family: "light";
+    src: url("../font/DINNEXTLTARABIC-LIGHT.ttf") format("truetype")
+}
+
+*{
+    font-weight: normal !important;
+}
+html,
+body{
+    direction: rtl;
+    font-family: 'regular', sans-serif;
+}
+h1, h2 ,h3 ,h4 ,h5, h6{
+    font-family: 'medium', sans-serif;
+    font-weight: normal;
+} 
+form.disabled{ 
+    pointer-events: none;
+    opacity: .6;
+}
+.filepond--root {
+	width: 200px;
+	margin: 0 auto;
+    font-family: "regular";
+}
+.filepond--credits{
+    display: none;
+}
+#main{
+    padding: 0;
+}
+
+.choices[data-type*=select-one]:after {
+    right: auto;
+    left: 11.5px;
+}
+.choices[data-type*=select-multiple] .choices__button, .choices[data-type*=text] .choices__button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    margin-right: 8px;
+    padding-right: 16px;
+    border-right: 1px solid #008fa1;
+}
+
+
+.badge-info{
+    background-color: rgb(67, 94, 190, .2);
+    color: rgb(67, 94, 190, 1);
+}
+
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+  }
+  
+.dragged {
+position: absolute;
+opacity: 0.5;
+z-index: 2000;
+}
+
+ol.example li.placeholder {
+position: relative;
+/** More li styles **/
+}
+ol.example li.placeholder:before {
+position: absolute;
+/** Define arrowhead **/
+}
+
+
+.sidebar-link{
+    display: flex !important;
+    align-items: center !important;
+}
+
+.sidebar-link i{
+    display: inline-block;
+    font-size: 20px;
+    margin-top: .60rem;
+}
+
+.dropdown-toggle:after{
+    display: none;
+}
+
+.alert-dot{
+    display: none;
+    position: absolute;
+    width: .7rem;
+    height: .7rem;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+    background-color: #dc3545;
+}
+.new-alert .alert-dot{
+    display: block;
+}
+
+.sidebar-wrapper .sidebar-header{ 
+    text-align: center;
+}
+.sidebar-wrapper .sidebar-header img {
+    height: 4.2rem; 
+}
+
+#auth #auth-left .auth-logo img {
+    height: 4rem;
+}
+#auth #auth-left .auth-logo {
+    margin-bottom: 2rem;
+}
+#auth #auth-left .auth-title {
+    font-size: 3rem;
+}
+#auth #auth-left .auth-subtitle {
+    font-size: 1.4rem;
+}
